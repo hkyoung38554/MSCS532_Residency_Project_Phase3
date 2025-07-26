@@ -1,32 +1,31 @@
 import heapq
+from typing import List
 from .label import Label
 
 class LabelPriorityQueue:
-    def __init__(self):
-        self.heap = []
-        self.count = 0
-        self.verbose = False
-        self.stats = {
-            "pushed": 0,
-            "popped": 0
-        }
+    """
+    Min‑heap over Label using lexicographic cost ordering.
+    """
+    __slots__ = ("_heap",)
 
-    def push(self, label: Label):
-        heapq.heappush(self.heap, (label.cost, self.count, label))
-        self.count += 1
-        self.stats["pushed"] += 1
-        if self.verbose:
-            print(f"Pushed: {label.node} {label.cost}")
+    def __init__(self):
+        self._heap: List[Label] = []
+
+    def push(self, label: Label) -> None:
+        if not isinstance(label, Label):
+            raise TypeError("Can only push Label instances")
+        heapq.heappush(self._heap, label)
 
     def pop(self) -> Label:
-        _, _, label = heapq.heappop(self.heap)
-        self.stats["popped"] += 1
-        if self.verbose:
-            print(f"Popped: {label.node} {label.cost}")
-        return label
+        if not self._heap:
+            raise IndexError("Pop from empty priority queue")
+        return heapq.heappop(self._heap)
 
-    def __bool__(self):
-        return bool(self.heap)
+    def __bool__(self) -> bool:
+        return bool(self._heap)
 
-    def __len__(self):
-        return len(self.heap)
+    def __len__(self) -> int:
+        return len(self._heap)
+
+    def __repr__(self) -> str:
+        return f"LabelPriorityQueue({self._heap})"

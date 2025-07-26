@@ -1,40 +1,35 @@
+from typing import List
 from .label import Label
 
 class LabelSet:
-    def __init__(self):
-        self.labels = []
-        self.verbose = False
-        self.stats = {
-            "total_attempted": 0,
-            "kept": 0,
-            "pruned": 0
-        }
+    """
+    Pareto‑front manager with ε‑pruning to control frontier size.
+    """
+    __slots__ = ("labels", "epsilon")
 
-    def add(self, new_label: Label) -> bool:
-        self.stats["total_attempted"] += 1
+    def __init__(self, epsilon: float = 0.0):
+        self.labels: List[Label] = []
+        self.epsilon = epsilon
 
-        # Check if any existing label dominates the new one
+    def add(self, label: Label) -> bool:
+        """
+        Insert label if not ε‑dominated; prune ε‑dominated existing ones.
+        Returns True if added.
+        """
+        if not isinstance(label, Label):
+            raise TypeError("Can only add Label instances")
+        new = []
+        eps = self.epsilon
         for existing in self.labels:
-            if existing.dominates(new_label):
-                self.stats["pruned"] += 1
-                if self.verbose:
-                    print(f"Pruned by dominance: {new_label.cost} by {existing.cost}")
+            # existing ε‑dominates label?
+            if all(e <= l + eps for e, l in zip(existing.cost, label.cost)):
                 return False
-
-        # Remove labels that are dominated by the new label
-        before = len(self.labels)
-        self.labels = [lbl for lbl in self.labels if not new_label.dominates(lbl)]
-        after = len(self.labels)
-
-        self.labels.append(new_label)
-        self.stats["kept"] += 1
-
-        if self.verbose and before != after:
-            print(f"Removed {before - after} dominated labels for {new_label.cost}")
+            # keep existing if not ε‑dominated by label
+            if not all(l <= e + eps for l, e in zip(label.cost, existing.cost)):
+                new.append(existing)
+        new.append(label)
+        self.labels = new
         return True
 
-    def __iter__(self):
-        return iter(self.labels)
-
-    def __repr__(self):
-        return f"LabelSet({[str(lbl) for lbl in self.labels]})"
+    def __repr__(self) -> str:
+        return f"LabelSet(epsilon={self.epsilon}, labels={self.labels})"

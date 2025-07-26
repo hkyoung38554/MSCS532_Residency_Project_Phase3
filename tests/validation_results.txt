@@ -1,0 +1,22 @@
+[TEST] test_remove_edge_invalid
+  [PASS] remove_edge('X','Y') raised ValueError
+  [PASS] remove_edge('Y','Z') raised ValueError
+.[TEST] test_sqlite_vs_memory_neighbors
+  Node A: sqlite -> [('B', (1.0, 2.0, 3.0)), ('C', (2.0, 1.0, 4.0))], memory -> [('B', (1.0, 2.0, 3.0)), ('C', (2.0, 1.0, 4.0))]
+  Node B: sqlite -> [('D', (0.5, 0.5, 0.5))], memory -> [('D', (0.5, 0.5, 0.5))]
+  Node C: sqlite -> [], memory -> []
+  Node D: sqlite -> [], memory -> []
+  [PASS] SQLite and memory neighbor lists match
+.[TEST] test_epsilon_pruning_limits_frontier
+  Frontier size after epsilon pruning: 1
+  [PASS] Frontier size is bounded by epsilon pruning
+.[TEST] test_priority_queue_ordering_and_errors
+  Popped first: Label(node=B, cost=(3, 2, 2))
+  Popped second: Label(node=A, cost=(5, 1, 1))
+  [PASS] pop() on empty queue raised IndexError
+  [PASS] push() invalid type raised TypeError
+.[TEST] test_memory_overhead_for_labels
+  Total memory allocated for 10000 Labels: 1559462 bytes
+  [PASS] Memory profiling shows allocation > 0 bytes
+.
+5 passed in 0.08s
