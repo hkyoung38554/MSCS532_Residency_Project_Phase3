@@ -83,10 +83,4 @@ pip install -r requirements.txt
 
 - Optimized source code reflecting report strategies
 - GitHub repository containing final implementation
-- Phase 3 evaluation report (submitted separately)
-
-## Author
-
-Haeri Kyoung  
-MSCS532 – University of the Cumberlands  
-Alternative Investments Team – Apex Fintech Solutions
+- Phase 3 evaluation report
