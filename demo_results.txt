@@ -1,0 +1,39 @@
+=== Graph Demo ===
+Adjacency List: {'A': [('B', (1, 1, 1)), ('C', (2, 0, 1))], 'B': [('D', (0, 3, 2))], 'C': [('D', (1, 1, 0))], 'D': []}
+Neighbors of A: [('B', (1, 1, 1)), ('C', (2, 0, 1))]
+BFS from A: ['A', 'B', 'C', 'D']
+DFS from A: ['A', 'B', 'D', 'C']
+Expected error removing non-existent edge: Edge A -> D not found
+
+=== LabelSet Demo ===
+Adding Label(node=X, cost=(5, 5, 5)): Added; Current set = [Label(node=X, cost=(5, 5, 5))]
+Adding Label(node=X, cost=(3, 7, 5)): Added; Current set = [Label(node=X, cost=(5, 5, 5)), Label(node=X, cost=(3, 7, 5))]
+Adding Label(node=X, cost=(5, 4, 6)): Added; Current set = [Label(node=X, cost=(5, 5, 5)), Label(node=X, cost=(3, 7, 5)), Label(node=X, cost=(5, 4, 6))]
+Adding Label(node=X, cost=(5, 5, 5)): Added; Current set = [Label(node=X, cost=(5, 5, 5)), Label(node=X, cost=(3, 7, 5)), Label(node=X, cost=(5, 4, 6)), Label(node=X, cost=(5, 5, 5))]
+
+=== LabelPriorityQueue Demo ===
+Pushing Label(node=A, cost=(5, 1, 1))
+Pushing Label(node=B, cost=(3, 2, 2))
+Pushing Label(node=C, cost=(3, 1, 3))
+Queue content before pops: LabelPriorityQueue([Label(node=C, cost=(3, 1, 3)), Label(node=A, cost=(5, 1, 1)), Label(node=B, cost=(3, 2, 2))])
+Popped: Label(node=C, cost=(3, 1, 3))
+Popped: Label(node=B, cost=(3, 2, 2))
+Popped: Label(node=A, cost=(5, 1, 1))
+Expected error popping empty queue: Pop from empty priority queue
+
+=== Combined Demo: Simple Pareto Expansion ===
+Expanding Label(node=S, cost=(0, 0, 0))
+  -> New non-dominated label at A: Label(node=A, cost=(1, 2, 3))
+  -> New non-dominated label at B: Label(node=B, cost=(2, 1, 3))
+Expanding Label(node=A, cost=(1, 2, 3))
+  -> New non-dominated label at T: Label(node=T, cost=(2, 3, 4))
+Expanding Label(node=B, cost=(2, 1, 3))
+  -> New non-dominated label at T: Label(node=T, cost=(3, 2, 5))
+Expanding Label(node=T, cost=(2, 3, 4))
+Expanding Label(node=T, cost=(3, 2, 5))
+Final label sets:
+  S: [Label(node=S, cost=(0, 0, 0))]
+  A: [Label(node=A, cost=(1, 2, 3))]
+  B: [Label(node=B, cost=(2, 1, 3))]
+  T: [Label(node=T, cost=(2, 3, 4)), Label(node=T, cost=(3, 2, 5))]
+

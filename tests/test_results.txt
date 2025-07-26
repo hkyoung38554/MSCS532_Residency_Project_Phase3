@@ -1,0 +1,46 @@
+[LOG] Created simple_graph with adjacency: {'A': [('B', (1.0, 2.0, 3.0))], 'B': []}
+[TEST] test_add_node: verifying nodes A and B exist
+[PASS] test_add_node: nodes found: ['A', 'B']
+.[LOG] Created simple_graph with adjacency: {'A': [('B', (1.0, 2.0, 3.0))], 'B': []}
+[TEST] test_remove_node: removing node 'B'
+[LOG] After removal, adjacency: {'A': []}
+[TEST] test_remove_node: verifying removal of non-existent node 'Z' raises KeyError
+[PASS] test_remove_node: KeyError raised for 'Z'
+.[LOG] Created simple_graph with adjacency: {'A': [('B', (1.0, 2.0, 3.0))], 'B': []}
+[TEST] test_add_remove_edge: removing edge A->B
+[LOG] After edge removal, adjacency A: []
+[TEST] test_add_remove_edge: verifying removing same edge again raises ValueError
+[PASS] test_add_remove_edge: ValueError raised for missing edge
+.[LOG] Created simple_graph with adjacency: {'A': [('B', (1.0, 2.0, 3.0))], 'B': []}
+[TEST] test_neighbors: retrieving neighbors of 'A'
+[LOG] Neighbors of A: [('B', (1.0, 2.0, 3.0))]
+[TEST] test_neighbors: verifying retrieving neighbors of non-existent node 'Z' raises KeyError
+[PASS] test_neighbors: KeyError raised for 'Z'
+.[LOG] Created simple_graph with adjacency: {'A': [('B', (1.0, 2.0, 3.0))], 'B': []}
+[TEST] test_bfs_dfs: adding edge B->C and testing traversals
+[LOG] BFS order: ['A', 'B', 'C']
+[LOG] DFS order: ['A', 'B', 'C']
+[PASS] test_bfs_dfs: BFS and DFS orders correct
+.[TEST] test_label_init_and_repr: created label Label(node=X, cost=(1.0, 2.0, 3.0))
+[PASS] test_label_init_and_repr
+.[TEST] test_invalid_cost: initializing Label with invalid cost tuple
+[PASS] test_invalid_cost: ValueError raised as expected
+.[LOG] test_dominance: comparing Label(node=A, cost=(1.0, 2.0, 3.0)) and Label(node=B, cost=(2.0, 2.0, 4.0))
+[PASS] test_dominance
+.[TEST] test_labelset_add_and_prune: initial labels []
+[LOG] After adding (1.0,1.0,1.0): [Label(node=X, cost=(1.0, 1.0, 1.0))]
+[LOG] After attempting dominated add (2.0,2.0,2.0): [Label(node=X, cost=(1.0, 1.0, 1.0))]
+[LOG] After adding non-dominated (1.5,0.5,1.0): [Label(node=X, cost=(1.0, 1.0, 1.0)), Label(node=X, cost=(1.5, 0.5, 1.0))]
+[PASS] test_labelset_add_and_prune
+.[TEST] test_type_error: adding invalid type
+[PASS] test_type_error
+.[TEST] test_push_and_pop: pushing labels Label(node=A, cost=(5.0, 1.0, 1.0)), Label(node=B, cost=(3.0, 2.0, 2.0))
+[LOG] Queue content before pop: LabelPriorityQueue([Label(node=B, cost=(3.0, 2.0, 2.0)), Label(node=A, cost=(5.0, 1.0, 1.0))])
+[LOG] Popped label: Label(node=B, cost=(3.0, 2.0, 2.0))
+[PASS] test_push_and_pop
+.[TEST] test_empty_pop: popping from empty queue
+[PASS] test_empty_pop
+.[TEST] test_push_type_error: pushing invalid type
+[PASS] test_push_type_error
+.
+13 passed in 0.02s
